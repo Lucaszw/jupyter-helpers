@@ -1,0 +1,31 @@
+environment:
+  matrix:
+    - PYTHON_VERSION: 2.7
+      MINICONDA: C:\Miniconda
+      PYTHON_ARCH: "32"
+
+version: '1.0.{build}'
+
+init:
+  - "ECHO %PYTHON_VERSION% %MINICONDA%"
+
+install:
+  - "set PATH=C:\\Program Files\\Git\\mingw64\\bin;%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - "call %MINICONDA%\\Scripts\\activate.bat"
+  - conda config --set always_yes yes --set changeps1 no
+  - conda config --add channels conda-forge
+  - conda config --add channels wheeler-microfluidics
+  - conda update -q conda
+  - conda install --yes conda-build jupyter path_helpers nose
+  - conda info -a
+  - pip install psutil
+  - conda-build .
+
+build: false
+
+test_script:
+  - nosetests .\\jupyter_helpers\\tests -vv --with-xunit
+
+after_test:
+  - ps: $wc = New-Object 'System.Net.WebClient'
+  - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\nosetests.xml))
