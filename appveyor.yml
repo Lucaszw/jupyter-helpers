@@ -1,6 +1,7 @@
 version: '1.0.{build}'
 
-matrix:  
+matrix:
+
   - PYTHON: "C:\\Python27_32"
     PYTHON_VERSION: "2.7"
     PYTHON_ARCH: "32"
