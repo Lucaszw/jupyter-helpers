@@ -1,5 +1,12 @@
 version: '1.0.{build}'
 
+matrix:
+  # Python 2.7.10 is the latest version and is not pre-installed.
+  
+  - PYTHON: "C:\\Python27.10"
+    PYTHON_VERSION: "2.7.10"
+    PYTHON_ARCH: "32"
+
 install:
   - "python --version"
   - "conda-build .conda-recipe"
