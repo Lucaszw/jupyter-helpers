@@ -10,7 +10,8 @@ environment:
       CONDA_NPY: "18"
 
 install:
-  - set PATH=C:\Anaconda2;C:\Anaconda2\Scripts;%PATH%
+  - set PATH=C:\Miniconda;C:\Miniconda\Scripts;%PATH%
   - "python --version"
   - "conda --version"
+  - "conda install conda-build"
   - "conda-build .conda-recipe"
