@@ -19,7 +19,6 @@ build: false
 
 test_script:
   - "conda-build -V"
-  - "conda-build .conda-recipe"
   - "nosetests -vv"
 
 artifacts:
