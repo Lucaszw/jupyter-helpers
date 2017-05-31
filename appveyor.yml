@@ -4,5 +4,7 @@ install:
   - set PATH=C:\Miniconda;C:\Miniconda\Scripts;%PATH%
   - "python --version"
   - "conda --version"
+  - "conda config --add channels conda-forge"
+  - "conda config --add channels wheeler-microfluidics"
   - "echo y | conda install conda-build"
   - "conda-build .conda-recipe"
