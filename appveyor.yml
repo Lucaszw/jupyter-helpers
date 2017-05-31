@@ -8,4 +8,5 @@ install:
   - "conda config --add channels wheeler-microfluidics"
   - "echo y | conda install nose"
   - "echo y | conda install conda-build"
-  - "conda-build .conda-recipe"
+  - "echo y | conda install path_helpers"
+  - "echo y | conda-build .conda-recipe"
