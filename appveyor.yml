@@ -10,10 +10,7 @@ install:
   - "conda --version"
   - "conda config --add channels conda-forge"
   - "conda config --add channels wheeler-microfluidics"
-  - "echo y | conda install jupyter"
-  - "echo y | conda install nose"
-  - "echo y | conda install conda-build"
-  - "echo y | conda install path_helpers"
+  - "conda install --yes jupyter nose conda-build path_helpers"
 
 test_script:
   - "%CMD_IN_ENV% conda-build .conda-recipe --quiet"
