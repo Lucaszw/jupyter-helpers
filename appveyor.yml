@@ -23,11 +23,13 @@ install:
 build: false
 
 test_script:
-  - "nosetests -v"
+  - nosetests -v
+
+after_test:
+  - "echo Tests Complete"
 
 on_success:
-  - echo Build succesful!
-  - coverage report
+  - "echo Build succesful!"
 
 artifacts:
   # Archive the generated conda package in the ci.appveyor.com build report.
