@@ -23,4 +23,4 @@ install:
 build: false
 
 test_script:
-  - nosetests -vvvv -x --pdb
+  - nosetests --processes=-1 --process-timeout=2
