@@ -22,4 +22,4 @@ install:
 build: false
 
 test_script:
-  - nosetests
+  - "nosetests .\\jupyter_helpers\\tests"
