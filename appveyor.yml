@@ -11,6 +11,7 @@ init:
 
 install:
   - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - "call %MINICONDA%\\Scripts\\activate.bat"
   - conda install --yes nose conda-build
   - conda config --set always_yes yes --set changeps1 no
   - conda config --add channels conda-forge
