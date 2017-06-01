@@ -16,10 +16,10 @@ install:
   - conda config --add channels wheeler-microfluidics
   - conda update -q conda
   - conda info -a
-  - conda install --yes jupyter nose conda-build path_helpers
+  - conda install --yes jupyter conda-build path_helpers
   - pip install coverage
 
 build: false
 
 test_script:
-  - "nosetests .\\jupyter_helpers\\tests"
+  - "nosetests .\\jupyter_helpers\\tests -vv"
