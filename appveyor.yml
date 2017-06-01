@@ -23,8 +23,7 @@ install:
 build: false
 
 test_script:
-  - "nosetests -vv"
-  - behave --tags ~@skip
+  - "nosetests -v"
 
 on_success:
   - echo Build succesful!
