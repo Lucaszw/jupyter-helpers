@@ -23,4 +23,4 @@ install:
 build: false
 
 test_script:
-  - nosetests -vv -x --pdb
+  - nosetests -vvvv -x --pdb
