@@ -23,7 +23,9 @@ install:
 build: false
 
 test_script:
-  - "echo Running tests"
+  - "echo Running Nose Tests:"
+  - nosetests -v
+  - "echo Nose Tests Complete"
 
 after_test:
   - "echo Tests Complete"
