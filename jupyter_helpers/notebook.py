@@ -23,7 +23,6 @@ class StoppableThread(Thread):
         self._stop_event = threading.Event()
 
     def stop(self):
-        print "STOPPING!!"
         self._stop_event.set()
 
     def stopped(self):
@@ -97,8 +96,6 @@ class Session(object):
 
         def enqueue_output(out, queue):
             for line in iter(out.readline, b''):
-                print "Thread has stopped:"
-                print self.thread.stopped()
                 if self.thread.stopped(): break
                 queue.put(line)
             out.close()
@@ -216,9 +213,6 @@ class Session(object):
         '''
         Kill the notebook server process, if running.
         '''
-        print "SESSION IS STOPPING"
-        print self.daemon
-        print self.process
         if self.daemon and self.process is not None:
             self.process = None
             self.thread  = None
