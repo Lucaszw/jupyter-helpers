@@ -4,4 +4,4 @@ def test_get_session():
     sm = notebook.SessionManager()
     sm.get_session()
     sm.stop()
-    return False
+    assert False
