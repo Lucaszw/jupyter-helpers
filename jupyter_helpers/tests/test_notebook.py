@@ -8,5 +8,7 @@ def test_get_session():
     sm = notebook.SessionManager()
     session = sm.get_session()
     session.thread.stop()
-    os.kill(session.process.pid, signal.SIGINT)
+    session.thread.join()
+    os.kill(session.process.pid, signal.CTRL_C_EVENT)
+    session.process.kill()
     pass
