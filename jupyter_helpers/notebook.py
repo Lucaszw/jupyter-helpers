@@ -7,10 +7,27 @@ import os
 import re
 import sys
 import time
+import threading
 import webbrowser
 
 from path_helpers import path
 
+
+class StoppableThread(Thread):
+    """Thread class with a stop() method. The thread itself has to check
+    regularly for the stopped() condition.
+    From: https://stackoverflow.com/questions/323972/is-there-any-way-to-kill-a-thread-in-python"""
+
+    def __init__(self, *args, **kwargs):
+        super(StoppableThread, self).__init__(*args,**kwargs)
+        self._stop_event = threading.Event()
+
+    def stop(self):
+        print "STOPPING!!"
+        self._stop_event.set()
+
+    def stopped(self):
+        return self._stop_event.is_set()
 
 class Session(object):
     '''
@@ -85,7 +102,7 @@ class Session(object):
 
         self.process = Popen(args_, stderr=PIPE, bufsize=1, close_fds=ON_POSIX, **kwargs)
         q = Queue()
-        self.thread = Thread(target=enqueue_output, args=(self.process.stderr, q))
+        self.thread = StoppableThread(target=enqueue_output, args=(self.process.stderr, q))
         self.thread.daemon = self.daemon # thread dies with the program
         self.thread.start()
         self._notebook_dir = os.getcwd()
@@ -196,10 +213,14 @@ class Session(object):
         '''
         Kill the notebook server process, if running.
         '''
+        print "SESSION IS STOPPING"
+        print self.daemon
+        print self.process
         if self.daemon and self.process is not None:
+            print "Stopping now..."
             self.process.kill()
             self.process = None
-            self.thread = None
+            self.thread.stop()
 
     def __del__(self):
         try:
