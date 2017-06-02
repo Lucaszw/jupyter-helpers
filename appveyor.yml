@@ -7,22 +7,21 @@ environment:
 version: '1.0.{build}'
 
 init:
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - "ECHO %PYTHON_VERSION% %MINICONDA%"
 
 install:
-  - "set PATH=%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
+  - "set PATH=C:\\Program Files\\Git\\mingw64\\bin;%MINICONDA%;%MINICONDA%\\Scripts;%PATH%"
   - "call %MINICONDA%\\Scripts\\activate.bat"
-  - conda install --yes nose conda-build
   - conda config --set always_yes yes --set changeps1 no
   - conda config --add channels conda-forge
   - conda config --add channels wheeler-microfluidics
   - conda update -q conda
+  - conda install --yes conda-build jupyter path_helpers nose
   - conda info -a
-  - conda install --yes jupyter path_helpers
-  - pip install coverage
-
 build: false
 
 test_script:
-  - "nosetests .\\jupyter_helpers\\tests -x -vv"
+  - "nosetests .\\jupyter_helpers\\tests -vv --with-xunit"
+
+after_test:
+  - curl -F ".\\nosetests.xml" "https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)"
