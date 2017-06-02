@@ -25,4 +25,4 @@ install:
 build: false
 
 test_script:
-  - "nosetests .\\jupyter_helpers\\tests -vv"
+  - "nosetests .\\jupyter_helpers\\tests -x -vv"
