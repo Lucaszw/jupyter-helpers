@@ -1,7 +1,9 @@
 from jupyter_helpers import notebook
 
 def test_get_session():
-    #sm = notebook.SessionManager()
-    #sm.get_session()
-    #sm.stop()
-    pass
+    sm = notebook.SessionManager()
+    session = sm.get_session()
+    session.stop()
+    print sm.sessions.values()
+    print "I was here!"
+    assert False
