@@ -24,4 +24,4 @@ test_script:
   - echo "Y" | nosetests .\\jupyter_helpers\\tests -vv --with-xunit
 
 after_test:
-  - curl -F ".\\nosetests.xml" "https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)"
+  - curl -F "data=@.\\nosetests.xml" https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)
