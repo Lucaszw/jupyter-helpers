@@ -97,6 +97,9 @@ class Session(object):
 
         def enqueue_output(out, queue):
             for line in iter(out.readline, b''):
+                print "Thread has stopped:"
+                print self.thread.stopped()
+                if self.thread.stopped(): break
                 queue.put(line)
             out.close()
 
@@ -217,10 +220,8 @@ class Session(object):
         print self.daemon
         print self.process
         if self.daemon and self.process is not None:
-            print "Stopping now..."
-            self.process.kill()
             self.process = None
-            self.thread.stop()
+            self.thread  = None
 
     def __del__(self):
         try:
