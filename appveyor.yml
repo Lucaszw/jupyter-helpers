@@ -19,12 +19,12 @@ install:
   - conda install --yes conda-build jupyter path_helpers nose
   - conda info -a
   - pip install psutil
+
 build: false
 
 test_script:
   - nosetests .\\jupyter_helpers\\tests -vv --with-xunit
 
 after_test:
-  - cat nosetests.xml
   - ps: $wc = New-Object 'System.Net.WebClient'
   - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\nosetests.xml))
