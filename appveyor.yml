@@ -18,6 +18,7 @@ install:
   - conda update -q conda
   - conda install --yes conda-build jupyter path_helpers nose
   - conda info -a
+  - pip install psutil
 build: false
 
 test_script:
