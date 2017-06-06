@@ -1,5 +1,4 @@
 environment:
-  binstar_token: lu-a21cd6bc-2ab4-4b30-87e4-0323933eea8d
   matrix:
     - PYTHON_VERSION: 2.7
       MINICONDA: C:\Miniconda
