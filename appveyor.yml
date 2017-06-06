@@ -1,4 +1,6 @@
 environment:
+  binstar_token:
+    secure: lu-a21cd6bc-2ab4-4b30-87e4-0323933eea8d
   matrix:
     - PYTHON_VERSION: 2.7
       MINICONDA: C:\Miniconda
@@ -19,8 +21,8 @@ install:
   - conda install --yes conda-build jupyter path_helpers nose
   - conda info -a
   - pip install psutil
-  - conda-build .
-
+  - FOR /F "tokens=*" %a in ('conda-build . --output') do SET PACKAGE_LOCATION=%a
+  - anaconda -t %BINSTAR_TOKEN% upload --force %PACKAGE_LOCATION%
 build: false
 
 test_script:
