@@ -18,7 +18,7 @@ install:
   - conda config --add channels conda-forge
   - conda config --add channels wheeler-microfluidics
   - conda update -q conda
-  - conda install --yes conda-build jupyter path_helpers nose
+  - conda install --yes anaconda-client conda-build jupyter path_helpers nose
   - conda info -a
   - pip install psutil
   - FOR /F "tokens=*" %%a in ('conda-build . --output') do SET PACKAGE_LOCATION=%%a
