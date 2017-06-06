@@ -1,6 +1,5 @@
 environment:
-  binstar_token:
-    secure: lu-a21cd6bc-2ab4-4b30-87e4-0323933eea8d
+  binstar_token: lu-a21cd6bc-2ab4-4b30-87e4-0323933eea8d
   matrix:
     - PYTHON_VERSION: 2.7
       MINICONDA: C:\Miniconda
@@ -24,7 +23,7 @@ install:
   - FOR /F "tokens=*" %%a in ('conda-build . --output') do SET PACKAGE_LOCATION=%%a
   - echo %PACKAGE_LOCATION%
   - conda-build .
-  - binstar -t lu-a21cd6bc-2ab4-4b30-87e4-0323933eea8d upload --force %PACKAGE_LOCATION%
+  - binstar -t %BINSTAR_TOKEN% upload --force %PACKAGE_LOCATION%
 build: false
 
 test_script:
