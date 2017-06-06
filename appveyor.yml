@@ -23,8 +23,7 @@ install:
   - pip install psutil
   - FOR /F "tokens=*" %%a in ('conda-build . --output') do SET PACKAGE_LOCATION=%%a
   - echo %PACKAGE_LOCATION%
-  - echo %BINSTAR_TOKEN%
-  - ls C:\Miniconda\conda-bld\win-32\
+  - conda-build .
   - binstar -t lu-a21cd6bc-2ab4-4b30-87e4-0323933eea8d upload --force %PACKAGE_LOCATION%
 build: false
 
