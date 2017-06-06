@@ -21,7 +21,7 @@ install:
   - conda install --yes conda-build jupyter path_helpers nose
   - conda info -a
   - pip install psutil
-  - FOR /F "tokens=*" %a in ('conda-build . --output') do SET PACKAGE_LOCATION=%a
+  - FOR /F "tokens=*" %%a in ('conda-build . --output') do SET PACKAGE_LOCATION=%%a
   - anaconda -t %BINSTAR_TOKEN% upload --force %PACKAGE_LOCATION%
 build: false
 
