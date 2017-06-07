@@ -29,8 +29,8 @@ install:
   - ps: ($json | ConvertTo-Json) | Out-File .\package\info\index.json
   - 7z a package2.tar .\package -ttar
   - 7z a package2.tar.bz2 package2.tar -tbzip2
-
-  - binstar -t %BINSTAR_TOKEN% upload --force package2
+  - ls
+  - binstar -t %BINSTAR_TOKEN% upload --force package2.tar.bz2
 build: false
 
 test_script:
