@@ -24,9 +24,9 @@ install:
   - conda-build .
   - 7z e -so %PACKAGE_LOCATION% -tbzip2 > package.tar
   - 7z x "package.tar" -opackage -ttar
-  - ps: $json = Get-Content '.\package\info\info.json' | Out-String | ConvertFrom-Json
+  - ps: $json = Get-Content '.\\package\\info\\index.json' | Out-String | ConvertFrom-Json
   - ps: $json | Add-Member Foo 'Bar'
-  - ps: ($json | ConvertTo-Json) | Out-File .\package\info\info.json
+  - ps: ($json | ConvertTo-Json) | Out-File .\package\info\index.json
   - 7z a package2.tar .\package -ttar
   - 7z a package2.tar.bz2 package2.tar -tbzip2
 
