@@ -22,7 +22,15 @@ install:
   - FOR /F "tokens=*" %%a in ('conda-build . --output') do SET PACKAGE_LOCATION=%%a
   - echo %PACKAGE_LOCATION%
   - conda-build .
-  - binstar -t %BINSTAR_TOKEN% upload --force %PACKAGE_LOCATION%
+  - 7z e -so %PACKAGE_LOCATION% > package.tar
+  - 7z x "package.tar" -o.\package
+  - ps: $json = Get-Content '.\package\info\info.json' | Out-String | ConvertFrom-Json
+  - ps: $json | Add-Member Foo 'Bar'
+  - ps: ($json | ConvertTo-Json) | Out-File .\package\info\info.json
+  - 7z a package2.tar .\package -ttar
+  - 7z a package2.tar.bz2 package2.tar -tbzip2
+
+  - binstar -t %BINSTAR_TOKEN% upload --force package2
 build: false
 
 test_script:
