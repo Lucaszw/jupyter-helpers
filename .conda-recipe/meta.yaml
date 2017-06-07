@@ -32,3 +32,7 @@ source:
 about:
   home: http://github.com/Lucaszw/jupyter-helpers
   license: MIT
+
+extra:
+  home: http://github.com/Lucaszw/jupyter-helpers
+  license: MIT
