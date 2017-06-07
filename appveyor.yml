@@ -22,11 +22,12 @@ install:
   - FOR /F "tokens=*" %%a in ('conda-build . --output') do SET PACKAGE_LOCATION=%%a
   - echo %PACKAGE_LOCATION%
   - conda-build .
-  - 7z e -so %PACKAGE_LOCATION% -tbzip2 > package.tar
-  - 7z x "package.tar" -opackage -ttar
+  - ps: $package_name = (( $env:PACKAGE_LOCATION -split '\\') | Select-Object -Last 1) -split '\.bz2' | Select-Object -First 1
+  - ps: 7z e $env:PACKAGE_LOCATION -tbzip2
+  - ps: 7z x $package_name -opackage -ttar
   - ps: $json = Get-Content '.\\package\\info\\index.json' | Out-String | ConvertFrom-Json
   - ps: $json | Add-Member Foo 'Bar'
-  - ps: ($json | ConvertTo-Json) | Out-File .\package\info\index.json
+  - ps: $json | ConvertTo-JSON | % { [System.Text.RegularExpressions.Regex]::Unescape($_) } | Set-Content .\package\info\index.json
   - 7z a package2.tar .\package\* -ttar
   - 7z a package2.tar.bz2 package2.tar -tbzip2
   - ls
